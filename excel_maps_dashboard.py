@@ -2,9 +2,18 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+from PIL import Image
 
 # --- CONFIG ---
 st.set_page_config(page_title="Proposal & Collaboration Maps", layout="wide")
+
+# Place this BEFORE st.title
+logo_path = "combined_logo.png"
+logo = Image.open(logo_path)
+st.image(logo, width=250)  # much smaller width, adjust if needed
+
+# Optional: add a small spacer after logo for aesthetics
+st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
 
 st.title("Proposal/Collaboration Mapping Dashboard")
 
@@ -71,7 +80,7 @@ if chart_type == "Choropleth Map":
         color="institutional_participations",
         hover_name="Country",
         color_continuous_scale="YlGnBu",
-        title="Number of Institutional Participations in Proposals (by Country)"
+        title="No. of Institutional Participations in Proposals (by Country) - Total Submitted Proposals: 226 / Total Funded Proposals: 42"
     )
     fig.update_layout(geo=dict(showframe=False, showcoastlines=True), margin=dict(l=0, r=0, t=40, b=0))
     st.plotly_chart(fig, use_container_width=True)
